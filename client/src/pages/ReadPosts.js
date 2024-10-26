@@ -5,10 +5,20 @@ const ReadPosts = (props) => {
 
     const [posts, setPosts] = useState([]);
 
+    // READ all post from table
+    const fetchPosts = async () => {
+        const { data } = await supabase
+            .from('Posts')
+            .select();
+
+        // set state of posts
+        setPosts(data)
+    }
+
     useEffect(() => {
-        setPosts(props.data);
+        fetchPosts();
     }, [props]);
-    
+
     return (
         <div className="ReadPosts">
             {
